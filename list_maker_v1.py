@@ -1,7 +1,7 @@
 import tweepy
 import time
 from text_similarity import *
-tweets_id=None
+tweets_id = None
 
 PUBLIC_API_KEY = '7GEAlwqaHsCdBMOm7oKgb4oHt'
 SECRET_API_KEY = '8l1hYYSqtKZKftWRPhsolqjtZbmpDOD8T6jr1VR9tiaSm7qoEq'
@@ -10,9 +10,9 @@ ACCESS_TOKEN_PUBLIC = '1503512551014862850-tu7NtTBXgkszFcelEawQryoVL65RQq'
 ACCESS_TOKEN_SECRET = 'CyEoYYq287nS9gbZg5edkJjsNSbASUmLSfS5vOiGkRMdK'
 
 SLEEP_TIME = 30
-STARTING_COUNT = 10
+STARTING_COUNT = 30
 
-LIST_NAME = 'Oops'
+LIST_NAME = 'JustGiveMeMoney(Thats what I want  Oh Yeah)'
 LIST_PRIVATE = True     #Set to False if you want the list public
 LIST_DESCRIPTION = 'List of users I was following'
 SKIP_UNFOLLOWING_PRIVATE_ACCOUNTS = False # Set to true to skip unfollowing private/locked accounts
@@ -86,13 +86,18 @@ while True:
     for i in range(len(output_list)-1):
         i+=1
         for b in range(len(Daily_memory)-2):
-            if(output_list[i]["similarities"][b]) >= 0.75 and (output_list[i]["similarities"][b]) <= 0.999:
+            if(output_list[i]["similarities"][b]) >= 0.75 and ((output_list[i]["similarities"][b]) <= 0.999) and ((Daily_memory[i].user).id != (Daily_memory[b].user).id):
                 if(b<=len(output_list)):
                     layer_1_list.append(Daily_memory[i].text)
                 else: 
                     layer_1_list.append(Daily_memory[i].text)
                     layer_1_list.append(Daily_memory[b].text)
     print((layer_1_list))
+    print(Daily_memory[27].text)
+    output_list[26]["similarities"]
+    print((Daily_memory[21]).text)
+
+
 
     layer_2_list = []
     layer_output_list = layered_run(layer_1_list)
@@ -101,7 +106,16 @@ while True:
             if layer_output_list[i]["similarities"][b] >= 0.75 and  layer_output_list[i]["similarities"][b] <= 0.999:
                 layer_2_list.append(layer_1_list[i])
 
-    print(layer_2_list)
+   #I should also have a way to compare similarities vs past average 
+   #Beyond that, reduced weighting for short timeline duplicates and long term less weight duplicates 
+    layer_output_list[0]["similarities"][0] #Comparing with itself 
+    layer_1_list[0]
+
+    layer_output_list[0]["similarities"][4]
+    layer_1_list[0]
+    layer_1_list[4]
+
+    #0 in output list = 1 in layer 1 list 
 
 
 
